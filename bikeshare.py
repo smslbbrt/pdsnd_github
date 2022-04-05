@@ -150,7 +150,7 @@ def station_stats(df):
     # create the most commin trip by combining start and end stations
     common_trip=df['Start Station'] + ' to ' + df['End Station']
 
-    # look for the most common trip
+    # look for the most popular route
     most_common_trip=common_trip.mode()[0]
     trip_count=common_trip.value_counts()
     print('\nThe most frequent combination of stations are: {}'.format(most_common_trip))
