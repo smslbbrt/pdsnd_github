@@ -5,10 +5,10 @@ Project Bikeshare : 01/04/2022 (dd/mm/yyyy)
 Readme document:    05/04/2022 (dd/mm/yyyy)
 
 ### Project Title
-Bikeshare
+Analysing BikeShare Data
 
 ### Description
-Analyse Bikeshare data
+This project allows the user to analyse a snapshot of BikeShare data
 
 ### Files used
 chicago.csv
@@ -16,7 +16,7 @@ new_york_city.csv
 washington.csv
 
 ### Credits
-o count frequency
+to count frequency
 https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.value_counts.html
 
 to concat to fields in DataFrame
