@@ -262,15 +262,25 @@ def raw_data(df):
         none"""
     # print header and first file rows of data
 
-    print(df.head())
     rows = 0
+    response =["yes","no"]
+    view_data = ''
+    while view_data not in response:
+        view_data = input('\nWould you like to view the raw data? Data will be displayed five rows at a time. Enter yes or no.\n')
+        if view_data.lower() =='yes':
+            print(df.head())
+        else:
+            break
+
+
     #checks with user if more data is required and display next five rows, if not required then break.
-    while True:
-        more_data = input('\nWould you like to view the next five rows of raw data? Enter yes or no.\n')
-        if more_data.lower()!='yes':
-           break
-        rows = rows + 5
-        print(df.iloc[rows:rows+5])
+    while view_data == 'yes':
+        more_data = input('\nWould you like to view the next five rows of raw data? Enter yes or no.\n').lower()
+        if more_data.lower()=='yes':
+            rows = rows + 5
+            print(df.iloc[rows:rows+5])
+        elif more_data != 'yes':
+            break
 
 
 
@@ -283,13 +293,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        while True:
-            view_data = input('\nWould you like to view the raw data? Data will be displayed five rows at a time. Enter yes or no.\n')
-            if view_data.lower() !='yes':
-               break
-            raw_data(df)
-            break
-
+        raw_data(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
