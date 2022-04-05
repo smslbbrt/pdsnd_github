@@ -25,7 +25,7 @@ def get_filters():
     city=''
     #collect and check if input is valid
     while city not in cities:
-        city= input('Enter the city you would like to explore, options are Chicago, New York City or Washington. You can enter "all" if you want to analyse all the cities: ').lower()
+        city= input('Enter the city you would like to explore, options are Chicago, New York City or Washington: ').lower()
         if city not in cities:
             print ('\nThe city you indentified does not appear in the data. Please check and re-enter the city')
         else:
