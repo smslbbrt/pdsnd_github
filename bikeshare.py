@@ -25,7 +25,7 @@ def get_filters():
     city=''
     #collect and check if input is valid
     while city not in cities:
-        city= input('Enter the city you would like to explore, options are Chicago, New York City or Washington. You can enter "all" if you want to analyse all the cities: ').lower()
+        city= input('Enter the city you would like to explore, options are Chicago, New York City or Washington: ').lower()
         if city not in cities:
             print ('\nThe city you indentified does not appear in the data. Please check and re-enter the city')
         else:
@@ -197,13 +197,12 @@ def trip_duration_stats(df):
     mean_trip = round(df['Trip Duration'].mean())
     # breaks the mean trip duration down in hours, minutes and seconds
     m, s = divmod(mean_trip,60)
+    h, m = divmod(m,60)
+
     if m > 60:
-        min_mean, s_mean = divmod(mean_trip,60)
-        h_mean, min_mean = divmod(min_mean,60)
-        print('\nThe mean travel time for the selcetd data is: {} hours, {} minutes and {} seconds'.format(h_mean, min_mean, sec_mean))
+        print('\nThe mean travel time for the selcetd data is: {} hours, {} minutes and {} seconds'.format(h, m, s))
     else:
-        min_mean, sec_mean = divmod(mean_trip,60)
-        print('\nThe mean travel time for the selcetd data is: {} minutes and {} seconds'.format(min_mean, sec_mean))
+        print('\nThe mean travel time for the selcetd data is: {} minutes and {} seconds'.format(m, s))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -263,15 +262,25 @@ def raw_data(df):
         none"""
     # print header and first file rows of data
 
-    print(df.head())
     rows = 0
+    response =["yes","no"]
+    view_data = ''
+    while view_data not in response:
+        view_data = input('\nWould you like to view the raw data? Data will be displayed five rows at a time. Enter yes or no.\n')
+        if view_data.lower() =='yes':
+            print(df.head())
+        else:
+            break
+
+
     #checks with user if more data is required and display next five rows, if not required then break.
-    while True:
-        more_data = input('\nWould you like to view the next five rows of raw data? Enter yes or no.\n')
-        if more_data.lower()!='yes':
-           break
-        rows = rows + 5
-        print(df.iloc[rows:rows+5])
+    while view_data == 'yes':
+        more_data = input('\nWould you like to view the next five rows of raw data? Enter yes or no.\n').lower()
+        if more_data.lower()=='yes':
+            rows = rows + 5
+            print(df.iloc[rows:rows+5])
+        elif more_data != 'yes':
+            break
 
 
 
@@ -284,13 +293,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        while True:
-            view_data = input('\nWould you like to view the raw data? Data will be displayed five rows at a time. Enter yes or no.\n')
-            if view_data.lower() !='yes':
-               break
-            raw_data(df)
-            break
-
+        raw_data(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
